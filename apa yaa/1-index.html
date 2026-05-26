@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Our Story</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #050505;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        .hero {
+            position: relative;
+            z-index: 2;
+            height: 100vh;
+            background:
+                linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.9)),
+                url('https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            animation: fadeUp 1.2s ease;
+        }
+
+        .tag {
+            letter-spacing: 8px;
+            color: #ff7ac3;
+            text-transform: uppercase;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: 90px;
+            line-height: 1;
+            font-weight: 800;
+        }
+
+        .hero span {
+            color: #ff4da6;
+        }
+
+        .hero p {
+            margin-top: 30px;
+            color: #d1d1d1;
+            font-size: 20px;
+            line-height: 1.8;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 40px;
+            padding: 16px 40px;
+            border-radius: 100px;
+            border: 1px solid #ff4da6;
+            color: white;
+            text-decoration: none;
+            transition: 0.4s;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn:hover {
+            background: #ff4da6;
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(255, 77, 166, 0.4);
+        }
+
+        section {
+            padding: 120px 10%;
+        }
+
+        .section-title {
+            font-size: 50px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .section-tag {
+            color: #ff4da6;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .story {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 60px;
+            align-items: center;
+        }
+
+        .story img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            border-radius: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 50px rgba(255, 77, 166, 0.2);
+        }
+
+        .story p {
+            color: #bdbdbd;
+            line-height: 2;
+            margin-top: 20px;
+            font-size: 18px;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 35px;
+            height: 450px;
+            cursor: pointer;
+        }
+
+        .card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.7s;
+        }
+
+        .card:hover img {
+            transform: scale(1.1);
+        }
+
+        .overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+            display: flex;
+            align-items: flex-end;
+            padding: 30px;
+
+            pointer-events: none;
+        }
+
+        .overlay h3 {
+            font-size: 30px;
+        }
+
+        .overlay p {
+            color: #d1d1d1;
+            margin-top: 10px;
+        }
+
+        .letter {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 40px;
+            padding: 70px;
+            backdrop-filter: blur(20px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .letter::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 77, 166, 0.2);
+            border-radius: 50%;
+            filter: blur(100px);
+            top: -50px;
+            right: -50px;
+        }
+
+        .letter p {
+            position: relative;
+            z-index: 2;
+            color: #d1d1d1;
+            line-height: 2.2;
+            font-size: 18px;
+            margin-top: 30px;
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 60px;
+        }
+
+        .time-box {
+            width: 180px;
+            height: 180px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 35px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(20px);
+        }
+
+        .time-box h1 {
+            font-size: 60px;
+            color: #ff4da6;
+        }
+
+        .time-box p {
+            color: #bdbdbd;
+            margin-top: 10px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #777;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        #love-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        .love {
+            position: absolute;
+            color: #ff4da6;
+            font-size: 30px;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+
+            0% {
+                transform: translateY(100vh) scale(1);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-120vh) scale(1.5);
+                opacity: 0;
+            }
+
+        }
+
+        @media(max-width: 768px) {
+            .hero h1 {
+                font-size: 55px;
+            }
+
+            .section-title {
+                font-size: 40px;
+            }
+
+            .letter {
+                padding: 40px 30px;
+            }
+
+            .time-box {
+                width: 140px;
+                height: 140px;
+            }
+
+            .time-box h1 {
+                font-size: 40px;
+            }
+
+
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="love-container"></div>
+    <section class="hero">
+        <div class="hero-content">
+            <div class="tag">A WEBSITE MADE WITH LOVE</div>
+
+            <h1>YOU & <span>ME</span></h1>
+
+            <p>
+                Every moment with you feels like my favorite movie scene.
+            </p>
+
+            <a href="#story" class="btn">Enter Our Story</a>
+        </div>
+    </section>
+
+    <section id="story">
+        <div class="story">
+            <div>
+                <div class="section-tag">OUR STORY</div>
+                <h1 class="section-title">
+                    The best part of my life started when I met you.
+                </h1>
+
+                <p>
+                    Dari awal kenal sampai sekarang, semuanya terasa spesial.
+                    Bahkan hal kecil bareng kamu selalu jadi kenangan yang susah dilupain.
+                </p>
+
+                <p>
+                    Website ini bukan cuma halaman biasa, tapi tempat buat nyimpen semua cerita kita ✨
+                </p>
+            </div>
+            <img src="our photo.jpeg">
+        </div>
+    </section>
+
+    <section>
+        <div class="section-tag">GALLERY</div>
+        <h1 class="section-title">Captured Moments</h1>
+
+
+        <div class="gallery">
+            <div class="card">
+                <a href="memory_2023.html">
+                    <img src="our photo 2.jpeg">
+                </a>
+                <div class="overlay">
+                    <div>
+                        <h4>Memory Tahun 2023</h4>
+                        <p>A beautiful day together ✨</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="4.jpeg">
+
+                <div class="overlay">
+                    <div>
+                        <h4>Memory Tahun 2024</h4>
+                        <p>Moment yang ga bakal dilupain 🤍</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="5.jpeg">
+
+                <div class="overlay">
+                    <div>
+                        <h4>Memory Tahun 2025</h4>
+                        <p>Our favorite day 💕</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gallery">
+                <div class="card">
+                    <img src="6.jpeg">
+
+                    <div class="overlay">
+                        <div>
+                            <h4>Memory Tahun 2026</h4>
+                            <p>A beautiful day together ✨</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+
+    <section>
+        <div class="letter">
+            <div class="section-tag">DIGITAL LETTER</div>
+            <h1 class="section-title">Thank you for staying.</h1>
+
+            <p>
+                Makasih udah jadi orang yang selalu ada. Makasih udah bikin hidup terasa lebih hangat.
+                Kalau suatu hari nanti kita baca website ini lagi, aku harap kita masih sama-sama,
+                masih saling genggam, dan masih jadi rumah buat satu sama lain 🤍
+            </p>
+        </div>
+    </section>
+
+    <section style="text-align:center;">
+        <div class="section-tag">COUNTDOWN</div>
+        <h1 class="section-title">Next Anniversary</h1>
+
+        <div class="countdown">
+            <div class="time-box">
+                <h1 id="days">00</h1>
+                <p>Days</p>
+            </div>
+
+            <div class="time-box">
+                <h1 id="hours">00</h1>
+                <p>Hours</p>
+            </div>
+
+            <div class="time-box">
+                <h1 id="minutes">00</h1>
+                <p>Minutes</p>
+            </div>
+
+            <div class="time-box">
+                <h1 id="seconds">00</h1>
+                <p>Seconds</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        Made with love ❤
+    </footer>
+</body>
+<script>
+    const targetDate = new Date('2026-09-08 00:00:00').getTime();
+
+    setInterval(() => {
+        const now = new Date().getTime();
+        const distance = targetDate - now;
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        document.getElementById('days').innerHTML = days;
+        document.getElementById('hours').innerHTML = hours;
+        document.getElementById('minutes').innerHTML = minutes;
+        document.getElementById('seconds').innerHTML = seconds;
+    }, 1000);
+
+    const container = document.getElementById("love-container");
+
+    function createLove() {
+
+        const love = document.createElement("div");
+
+        love.classList.add("love");
+
+        love.innerHTML = "❤";
+
+        love.style.left = Math.random() * 100 + "vw";
+
+        love.style.animationDuration = (Math.random() * 5 + 5) + "s";
+
+        love.style.fontSize = (Math.random() * 20 + 20) + "px";
+
+        container.appendChild(love);
+
+        setTimeout(() => {
+            love.remove();
+        }, 10000);
+
+    }
+
+    setInterval(createLove, 500);
+
+</script>
+
+</html>

@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Couple Quiz</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Poppins, sans-serif;
+            background: #050505;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .quiz-box {
+            width: 90%;
+            max-width: 700px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 50px;
+            border-radius: 40px;
+            backdrop-filter: blur(20px);
+            text-align: center;
+        }
+
+        h1 {
+            color: #ff4da6;
+            margin-bottom: 20px;
+        }
+
+        #question {
+            font-size: 28px;
+            margin-bottom: 40px;
+            line-height: 1.5;
+        }
+
+        button {
+            width: 100%;
+            margin: 10px 0;
+            padding: 18px;
+            border: none;
+            border-radius: 20px;
+            background: #111;
+            color: white;
+            cursor: pointer;
+            font-size: 18px;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #ff4da6;
+            transform: scale(1.03);
+        }
+
+        #result {
+            margin-top: 30px;
+            font-size: 22px;
+            color: #ffb3d9;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="quiz-box">
+
+        <h1>Couple Quiz 💕</h1>
+
+        <div id="question">
+            Apa makanan favorit aku?
+        </div>
+
+        <div id="answers">
+            <button onclick="checkAnswer(false)">Bakso</button>
+            <button onclick="checkAnswer(true)">Seblak</button>
+            <button onclick="checkAnswer(false)">Mie Ayam</button>
+            <button onclick="checkAnswer(false)">Sate</button>
+        </div>
+
+        <div id="result"></div>
+
+    </div>
+
+    <script>
+
+        const quizData = [
+
+            {
+                question: "1. Apa makanan favorit aku? 😋",
+                answers: [
+                    { text: "Seblak", correct: false },
+                    { text: "Bakso", correct: true },
+                    { text: "Mie Ayam", correct: false },
+                    { text: "Sate", correct: false }
+                ]
+            },
+
+            {
+                question: "2. Tanggal jadian kita kapan? 💕",
+                answers: [
+                    { text: "12 Januari", correct: false },
+                    { text: "8 September", correct: true },
+                    { text: "20 Maret", correct: false },
+                    { text: "1 April", correct: false }
+                ]
+            },
+
+            {
+                question: "3. Aku paling suka kalau kita...? 😭",
+                answers: [
+                    { text: "Main bareng", correct: true },
+                    { text: "Berantem", correct: false },
+                    { text: "Diam-diaman", correct: false },
+                    { text: "Ngilang", correct: false }
+                ]
+            },
+
+            {
+                question: "4. Warna favorit aku apa? 🎨",
+                answers: [
+                    { text: "Hitam", correct: false },
+                    { text: "Coklat", correct: false },
+                    { text: "Cream", correct: false },
+                    { text: "Navy", correct: true }
+                ]
+            },
+
+            {
+                question: "5. Aku paling suka dipanggil apa? 😚",
+                answers: [
+                    { text: "Sayang", correct: true },
+                    { text: "Bos", correct: false },
+                    { text: "Ade", correct: false },
+                    { text: "Gembull", correct: true }
+                ]
+            },
+
+            {
+                question: "6. Tempat date favorit kita dimana? 🌆",
+                answers: [
+                    { text: "Mall", correct: true },
+                    { text: "Kuburan", correct: false },
+                    { text: "Warnet", correct: false },
+                    { text: "Pasar", correct: false }
+                ]
+            },
+
+            {
+                question: "7. Aku paling sering ngambek karena? 😭",
+                answers: [
+                    { text: "Slow respon", correct: true },
+                    { text: "Kepedesan", correct: false },
+                    { text: "Hujan", correct: false },
+                    { text: "Ngantuk", correct: false }
+                ]
+            },
+
+            {
+                question: "8. Siapa yang paling lucu? 🤣",
+                answers: [
+                    { text: "Aku", correct: true },
+                    { text: "Tetangga", correct: false },
+                    { text: "Google", correct: false },
+                    { text: "Kucing", correct: false }
+                ]
+            },
+
+            {
+                question: "9. Lagu couple favorit kita apa? 🎵",
+                answers: [
+                    { text: "Perfect", correct: true },
+                    { text: "Baby Shark", correct: false },
+                    { text: "Balonku", correct: false },
+                    { text: "Pelangi", correct: false }
+                ]
+            },
+
+            {
+                question: "10. Siapa orang favorit aku? 💖",
+                answers: [
+                    { text: "Kamu", correct: true },
+                    { text: "Tetangga", correct: false },
+                    { text: "Artis", correct: false },
+                    { text: "Robot", correct: false }
+                ]
+            }
+
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+
+        const questionEl = document.getElementById("question");
+        const answersEl = document.getElementById("answers");
+        const resultEl = document.getElementById("result");
+
+        function loadQuestion() {
+
+            const currentQuiz = quizData[currentQuestion];
+
+            questionEl.innerHTML = currentQuiz.question;
+
+            answersEl.innerHTML = "";
+
+            currentQuiz.answers.forEach(answer => {
+
+                const button = document.createElement("button");
+
+                button.innerHTML = answer.text;
+
+                button.onclick = () => selectAnswer(answer.correct);
+
+                answersEl.appendChild(button);
+
+            });
+
+        }
+
+        function selectAnswer(correct) {
+
+            if (correct) {
+                score++;
+                resultEl.innerHTML = "BENERRR 😭💕";
+            } else {
+                resultEl.innerHTML = "SALAHH 😭";
+            }
+
+            setTimeout(() => {
+
+                resultEl.innerHTML = "";
+
+                currentQuestion++;
+
+                if (currentQuestion < quizData.length) {
+
+                    loadQuestion();
+
+                } else {
+
+                    showFinalScore();
+
+                }
+
+            }, 1000);
+
+        }
+
+        function showFinalScore() {
+
+            questionEl.innerHTML = `Quiz selesai 💖<br>Skor kamu: ${score}/${quizData.length}`;
+
+            answersEl.innerHTML = "";
+
+            if (score === quizData.length) {
+
+                resultEl.innerHTML = "KAMU PALING NGERTI AKU 😭💕";
+
+            } else if (score >= 7) {
+
+                resultEl.innerHTML = "Lucuu banget kamu masih hafal semuanya 😚";
+
+            } else if (score >= 4) {
+
+                resultEl.innerHTML = "Lumayan ngerti aku 😭";
+
+            } else {
+
+                resultEl.innerHTML = "YAHH HARUS LEBIH KENAL LAGI 😭";
+
+            }
+
+        }
+
+        loadQuestion();
+
+    </script>
+</body>
+
+</html>
